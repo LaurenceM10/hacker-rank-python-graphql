@@ -6,6 +6,7 @@ import links.schema
 class Query(links.schema.Query, graphene.ObjectType):
     pass
 
+
 class Mutation(links.schema.Mutation, graphene.ObjectType):
     pass
 

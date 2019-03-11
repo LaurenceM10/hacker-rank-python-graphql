@@ -1,7 +1,8 @@
 import graphene
 from graphene_django import DjangoObjectType
 
-from .models import Link, Book
+from .models import Link
+from .models import Book
 
 
 # Define the output fields based in Link model
@@ -12,8 +13,9 @@ class LinkType(DjangoObjectType):
 
 
 class BookType(DjangoObjectType):
-    model = Book
-    description = 'This represent a Book'
+    class Meta:
+        model = Book
+        description = 'This represent a Book'
 
 # Query to list links
 class Query(graphene.ObjectType):
