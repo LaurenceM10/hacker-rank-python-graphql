@@ -3,11 +3,13 @@ from graphene_django import DjangoObjectType
 
 from .models import Link
 
+
 # Define the output fields based in Link model
 class LinkType(DjangoObjectType):
     class Meta:
         model = Link
         description = 'This represent a Link'
+
 
 # Query to list links
 class Query(graphene.ObjectType):
