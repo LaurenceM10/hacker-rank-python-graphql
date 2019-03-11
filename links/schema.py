@@ -18,10 +18,15 @@ class BookType(DjangoObjectType):
 # Query to list links
 class Query(graphene.ObjectType):
     links = graphene.List(LinkType)
+    books = graphene.List(BookType)
 
     # Return the links from database using Django ORM
     def resolve_links(self, info, **kwargs):
         return Link.objects.all()
+
+    def resolve_books(self, info, **kwargs):
+        return Book.objects.all()
+
 
 
 class CreateLink(graphene.Mutation):
