@@ -81,5 +81,5 @@ class CreateBook(graphene.Mutation):
 
 # Mutation class to resolved the CreateLink mutation
 class Mutation(graphene.ObjectType):
-    create_link = CreateLink.Field(),
+    create_link = CreateLink.Field()
     create_book = CreateBook.Field()
