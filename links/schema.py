@@ -17,6 +17,7 @@ class BookType(DjangoObjectType):
         model = Book
         description = 'This represent a Book'
 
+
 # Query to list links
 class Query(graphene.ObjectType):
     links = graphene.List(LinkType)
@@ -28,7 +29,6 @@ class Query(graphene.ObjectType):
 
     def resolve_books(self, info, **kwargs):
         return Book.objects.all()
-
 
 
 class CreateLink(graphene.Mutation):
@@ -55,6 +55,31 @@ class CreateLink(graphene.Mutation):
         )
 
 
+class CreateBook(graphene.Mutation):
+    # Output fields
+    id = graphene.Int()
+    title = graphene.String()
+    description = graphene.String()
+
+    # Mutation arguments
+    class Arguments:
+        title = graphene.String()
+        description = graphene.String()
+
+    # Mutation method: to create a link in the database
+    def mutate(self, info, title, description):
+        book = Book(title=title, description=description)
+        book.save()
+
+        # Return the link saved, this matches with the output fiels
+        return CreateBook(
+            id=book.id,
+            title=book.title,
+            description=book.description,
+        )
+
+
 # Mutation class to resolved the CreateLink mutation
 class Mutation(graphene.ObjectType):
-    create_link = CreateLink.Field()
+    create_link = CreateLink.Field(),
+    create_book = CreateBook.Field()
